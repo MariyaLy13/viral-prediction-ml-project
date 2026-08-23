@@ -50,12 +50,12 @@ Two‑stage modeling pipeline:
 Classification — Identify whether a news item is viral
 Regression — Predict the exact engagement level for viral items
 
-### ✔ Classification (viral / not viral)
-- **ROC-AUC** - main matric  
+### 📌 Classification (viral / not viral)
+- **ROC-AUC** - main matric - the best choice for ranking quality: show how well the model separates viral posts from non-viral ones, regardless of the classification threshold.This is critical for the virality prediction task, where businesses are not just interested in determining a class, but rather in understanding which posts have the highest viral potential. ROC-AUC is a robust metric in the presence of class imbalance.
 - additional - F1  
 
-### ✔ Regression (number of interactions)
-- RMSE - main matric
+### 📌 Regression (number of interactions)
+- RMSE - main matric - RMSE shows the average error of the model in units of the target (number of interactions) and strongly penalizes large errors, which is important for predicting virality. The metric is easily interpreted by businesses and is a standard in tasks of predicting numerical values ​​(traffic, sales, interactions).
 
 ---
 
@@ -86,15 +86,18 @@ Regression — Predict the exact engagement level for viral items
 
 ## 5. Results (experiment table)
 
-| Model               | Preprocessing    | ROC-AUC | F1   | RMSE | Comment |
-|----------------------|------------------|--------|------|--------|----------|
-| Logistic Regression  | TF-IDF           | 0.78   | 0.65 | 0.72   | Базова модель |
-| Random Forest        | TF-IDF           | 0.82   | 0.68 | 0.75   | Краще за baseline |
-| LightGBM             | TF-IDF           | 0.87   | 0.71 | 0.80   | Сильний результат |
-| XGBoost              | TF-IDF           | 0.88   | 0.72 | 0.81   | Стабільний |
-| SVM                  | TF-IDF (scaled)  | 0.85   | 0.70 | 0.78   | Чутливий до scaling |
-| BERT Classifier      | Embeddings       | 0.91   | 0.74 | 0.85   | Найкращий результат |
-| Ensemble (LGBM+BERT) | TF-IDF + BERT    | 0.92   | 0.75 | 0.86   | Фінальна модель |
+| Model                | Split            | ROC-AUC |   F1   |     RMSE      |
+|----------------------|------------------|---------|--------|---------------|
+| Baseline             | Train            | 0.9300  | 0.4580 | 2,192,539.35  |
+| Baseline             | Val              | 0.8670  | 0.3281 | 8,444.59      |
+| Baseline             | Test             | 0.8684  | 0.3296 | 77,707,033.05 |
+| LightGBM             | Train            | 0.9992  | 0.9072 | 441.56        |
+| LightGBM             | Val              | 0.8700  | 0.3293 | 530.34        |
+| LightGBM             | Test             | 0.8678  | 0.3228 | 595.26        |
+| BERT Classifier      | Train            | 0.5020  | 0.0960 | 726.42        |
+| BERT Classifier      | Val              | 0.8608  | 0.4254 | 564.28        |
+| BERT Classifier      | Test             | 0.8618  | 0.4364 | 547.04        |
+| Ensemble (LGBM+BERT) | pending          | 0.0000  | 0.0000 | 0.0000        |
 
 ---
 
@@ -108,37 +111,7 @@ Regression — Predict the exact engagement level for viral items
 
 ---
 
-## 7. Структура проєкту
-project-name/
-├── README.md
-├── requirements.txt
-│
-├── data/
-│   ├── raw/
-│   └── processed/
-│
-├── notebooks/
-│   ├── 01_eda.ipynb
-│   ├── 02_preprocessing.ipynb
-│   ├── 03_training.ipynb
-│
-├── src/
-│   ├── preprocessing.py
-│   ├── models.py
-│   ├── evaluation.py
-│
-├── models/
-│   ├── lgbm_model.pkl
-│   ├── bert_classifier.pt
-│
-└── reports/
-├── metrics_table.png
-├── model_comparison.md
-
-
----
-
-## 8. Author
+## 7. Author
 
 Mariia Lysiak
 ML Engineer / Data Analyst  
