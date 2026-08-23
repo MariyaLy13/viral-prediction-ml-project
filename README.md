@@ -1,4 +1,4 @@
-# Viral Prediction ML Project
+# Viral News Prediction
 
 A machine learning project to predict the virality of news posts. The goal is to build a model that, based on the text and metadata of the news, predicts the level of user interaction (clicks, reactions, sharing). The project includes a full cycle: EDA, preprocessing, model building, evaluation and comparison of results.
 
