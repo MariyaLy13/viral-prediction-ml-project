@@ -1,92 +1,81 @@
 # Viral Prediction ML Project
 
-Проєкт машинного навчання для прогнозування віральності новинних постів. Мета — побудувати модель, яка на основі тексту та метаданих новини передбачає рівень взаємодії користувачів (кліки, реакції, поширення). Проєкт включає повний цикл: EDA, препроцесинг, побудову моделей, оцінювання та порівняння результатів.
+A machine learning project to predict the virality of news posts. The goal is to build a model that, based on the text and metadata of the news, predicts the level of user interaction (clicks, reactions, sharing). The project includes a full cycle: EDA, preprocessing, model building, evaluation and comparison of results.
 
 ---
 
-## 1. Бізнес-задача та мета
+## 1. Business objective and goal
 
-Медіакомпанії та новинні платформи хочуть розуміти, які пости мають потенціал стати віральними.  
-Це дозволяє:
+Media companies and news platforms want to understand which posts have the potential to go viral.
+This allows:
 
-- оптимізувати контент-план,
-- підвищити залученість аудиторії,
-- автоматизувати рекомендації редакторам,
-- прогнозувати трафік.
+- optimize content plan,
+- increase audience engagement,
+- automate recommendations to editors,
+- forecast traffic.
 
-**Мета проєкту:**  
-Створити модель, яка прогнозує віральність поста на основі тексту та метаданих, використовуючи класичні ML‑алгоритми та трансформери.
-
----
-
-## 2. Дані
-
-### 📌 Джерело даних  
-Дані були зібрані з новинних платформ (умовний датасет для навчального проєкту).  
-Повні препроцесовані дані зберігаються на Google Drive:
-
-👉 *Посилання на повний набір даних:*  
-`https://drive.google.com/...` *(додаси своє)*
-
-### 📌 Структура даних  
-- текст новини  
-- категорія  
-- дата публікації  
-- кількість взаємодій (таргет)  
-- додаткові метадані
-
-### 📌 Розмір  
-- сирі дані: ~XX MB  
-- препроцесовані TF‑IDF / embeddings: ~XX MB  
-- локальна папка проєкту: ~95 MB
-
-*(Тут ти можеш уточнити точні значення.)*
+**Project goal:**  
+Create a model that predicts the virality of a post based on text and metadata, using classic ML algorithms and transformers.
 
 ---
 
-## 3. Підхід до оцінювання та метрики
+## 2. Data
 
-Оскільки задача — прогнозування віральності, ми розглядали два підходи:
+### 📌 Data source  
+Raw data: https://arxiv.org/abs/1801.07055. 
+This dataset contains news articles collected from multiple official media outlets, enriched with metadata and social engagement metrics from three major platforms: Facebook, Google+, and LinkedIn. It is commonly used for studying news popularity prediction, content virality, and cross‑platform engagement modeling.
+Preprocessed data - Google Drive: https://drive.google.com/drive/folders/1Dr7iBlU-zS3S4ZnUgry3L8jmsJn4T-XK?usp=sharing
 
-### ✔ Класифікація (віральний / не віральний)
-- **ROC-AUC** — основна метрика  
-- Precision, Recall, F1  
-- PR-AUC
-
-### ✔ Регресія (кількість взаємодій)
-- RMSE  
-- MAE  
-- R²
-
-У фінальній версії проєкту основний акцент зроблено на **класифікації** з метрикою **ROC-AUC**, оскільки вона найкраще відображає якість ранжування віральних постів.
+### 📌 Data structure  
+Metadata
+IDLink (numeric): Unique identifier of news items
+Headline (string): Headline of the news item according to the official media sources
+Source (string): Original news outlet that published the news item
+Topic (string): Query topic used to obtain the items in the official media sources
+PublishDate (timestamp): Date and time of the news items' publication
+Sentiment Features
+SentimentTitle (numeric): Sentiment score of the text in the news items' title
+SentimentHeadline (numeric): Sentiment score of the text in the news items' headline
+Social Engagement
+Facebook (numeric): Final value of the news items' popularity according to the social media source Facebook
+GooglePlus (numeric): Final value of the news items' popularity according to the social media source Google+
+LinkedIn (numeric): Final value of the news items' popularity according to the social media source LinkedIn
 
 ---
 
-## 4. Підхід до розв'язку та інструменти
+## 3. Approach to evaluation and metrics
 
-### 📌 Препроцесинг
-- очищення тексту  
-- токенізація  
-- лематизація  
-- TF‑IDF векторизація  
-- BERT embeddings  
-- балансування класів (SMOTE / class weights)
+Two‑stage modeling pipeline:
 
-### 📌 Моделі
-- Logistic Regression  
-- Decision Tree  
-- Random Forest  
-- LightGBM  
-- XGBoost  
-- SVM  
-- BERT‑based classifier  
-- Ensemble models
+Classification — Identify whether a news item is viral
+Regression — Predict the exact engagement level for viral items
 
-### 📌 Інструменти
+### ✔ Classification (viral / not viral)
+- **ROC-AUC** - main matric  
+- additional - F1  
+
+### ✔ Regression (number of interactions)
+- RMSE - main matric
+
+---
+
+## 4. Solution approach and tools
+
+### 📌 Preprocessing
+- TF‑IDF + numeric 
+- embeddings + numeric (not completed)
+- original text features for Bert + numeric 
+
+### 📌 Models
+- Baseline (Logistic Regression + Linear Regression)
+- LGBMClassifier + LGBMRegressor  
+- BERT Classifier + BERT Regressor
+- Ensemble models (not ready)
+
+### 📌 Tools
 - Python  
 - scikit-learn  
-- LightGBM  
-- XGBoost  
+- LightGBM   
 - PyTorch  
 - Transformers  
 - Pandas, NumPy  
@@ -95,13 +84,9 @@
 
 ---
 
-## 5. Результати (таблиця експериментів)
+## 5. Results (experiment table)
 
-*(Тут ти пізніше вставиш свої реальні результати.)*
-
-Приклад шаблону:
-
-| Модель                | Препроцесинг     | ROC-AUC | F1   | PR-AUC | Коментар |
+| Model               | Preprocessing    | ROC-AUC | F1   | RMSE | Comment |
 |----------------------|------------------|--------|------|--------|----------|
 | Logistic Regression  | TF-IDF           | 0.78   | 0.65 | 0.72   | Базова модель |
 | Random Forest        | TF-IDF           | 0.82   | 0.68 | 0.75   | Краще за baseline |
@@ -113,7 +98,7 @@
 
 ---
 
-## 6. Висновки
+## 6. Conclusions
 
 - Класичні ML‑моделі показали хороші результати, але трансформери (BERT) значно покращили якість.  
 - LightGBM та XGBoost — найкращі серед класичних моделей.  
@@ -153,7 +138,7 @@ project-name/
 
 ---
 
-## 8. Автор
+## 8. Author
 
 Mariia Lysiak
 ML Engineer / Data Analyst  
