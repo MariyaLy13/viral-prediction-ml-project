@@ -27,19 +27,19 @@ This dataset contains news articles collected from multiple official media outle
 Preprocessed data - Google Drive: https://drive.google.com/drive/folders/1Dr7iBlU-zS3S4ZnUgry3L8jmsJn4T-XK?usp=sharing
 
 ### 📌 Data structure  
-Metadata
-IDLink (numeric): Unique identifier of news items
-Headline (string): Headline of the news item according to the official media sources
-Source (string): Original news outlet that published the news item
-Topic (string): Query topic used to obtain the items in the official media sources
-PublishDate (timestamp): Date and time of the news items' publication
-Sentiment Features
-SentimentTitle (numeric): Sentiment score of the text in the news items' title
-SentimentHeadline (numeric): Sentiment score of the text in the news items' headline
-Social Engagement
-Facebook (numeric): Final value of the news items' popularity according to the social media source Facebook
-GooglePlus (numeric): Final value of the news items' popularity according to the social media source Google+
-LinkedIn (numeric): Final value of the news items' popularity according to the social media source LinkedIn
+- Metadata
+- IDLink (numeric): Unique identifier of news items
+- Headline (string): Headline of the news item according to the official media sources
+- Source (string): Original news outlet that published the news item
+- Topic (string): Query topic used to obtain the items in the official media sources
+- PublishDate (timestamp): Date and time of the news items' publication
+- Sentiment Features
+- SentimentTitle (numeric): Sentiment score of the text in the news items' title
+- SentimentHeadline (numeric): Sentiment score of the text in the news items' headline
+- Social Engagement
+- Facebook (numeric): Final value of the news items' popularity according to the social media source Facebook
+- GooglePlus (numeric): Final value of the news items' popularity according to the social media source Google+
+- LinkedIn (numeric): Final value of the news items' popularity according to the social media source LinkedIn
 
 ---
 
@@ -94,24 +94,36 @@ Regression — Predict the exact engagement level for viral items
 | LightGBM             | Train            | 0.9992  | 0.9072 | 441.56        |
 | LightGBM             | Val              | 0.8700  | 0.3293 | 530.34        |
 | LightGBM             | Test             | 0.8678  | 0.3228 | 595.26        |
-| BERT Classifier      | Train            | 0.5020  | 0.0960 | 726.42        |
-| BERT Classifier      | Val              | 0.8608  | 0.4254 | 564.28        |
-| BERT Classifier      | Test             | 0.8618  | 0.4364 | 547.04        |
-| Ensemble (LGBM+BERT) | pending          | 0.0000  | 0.0000 | 0.0000        |
+| BERT                 | Train            | 0.5020  | 0.0960 | 726.42        |
+| BERT                 | Val              | 0.8608  | 0.4254 | 564.28        |
+| BERT                 | Test             | 0.8618  | 0.4364 | 547.04        |
+| Hybrid approach      | pending          | 0.0000  | 0.0000 | 0.0000        |
 
 ---
 
 ## 6. Conclusions
 
-- Класичні ML‑моделі показали хороші результати, але трансформери (BERT) значно покращили якість.  
-- LightGBM та XGBoost — найкращі серед класичних моделей.  
-- Використання embeddings суттєво підвищує ROC-AUC.  
-- Фінальна ансамблева модель досягла найкращих показників.  
-- Проєкт демонструє повний ML‑пайплайн: від EDA до продакшн‑готової моделі.
+The experiment results suggest that no single model fully captures both the structural metadata
+patterns (where LightGBM excels) and the deep semantic patterns in text (where BERT excels). This
+motivates exploring hybrid approaches.
+
+### 7. Future Work
+
+Several promising directions can further improve the system:
+
+1. **Two‑Stage Hybrid Pipeline (LGBM Classifier + BERT Regressor)**  
+   A combined approach where LightGBM first identifies potentially viral posts, and BERT then
+   predicts the expected engagement level for those posts. This mirrors real editorial workflows:
+   first detect “high‑potential” content, then estimate its impact. This pipeline can reduce noise,
+   improve ranking quality, and provide more actionable predictions.
+
+2. **Improved Text Representations**  
+   Using domain‑specific transformer models (e.g., DistilBERT fine‑tuned on news data) may improve
+   classification performance. Ligther model then Bert give me the opportunity to train throuth more iteration to improve ROC AUC on train for classifier
 
 ---
 
-## 7. Author
+## 8. Author
 
 Mariia Lysiak
 ML Engineer / Data Analyst  
