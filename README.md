@@ -47,8 +47,8 @@ This dataset contains news articles collected from multiple official media outle
 
 Two‑stage modeling pipeline:
 
-- **Classification** — Identify whether a news item is viral
-- **Regression** — Predict the exact engagement level for viral items
+- **Classification** - Identify whether a news item is viral
+- **Regression** - Predict the exact engagement level for viral items
 
 ### 📌 Classification (viral / not viral)
 - **ROC-AUC** - main matric - the best choice for ranking quality: show how well the model separates viral posts from non-viral ones, regardless of the classification threshold.This is critical for the virality prediction task, where businesses are not just interested in determining a class, but rather in understanding which posts have the highest viral potential. ROC-AUC is a robust metric in the presence of class imbalance.
@@ -70,7 +70,7 @@ Two‑stage modeling pipeline:
 - Baseline (Logistic Regression + Linear Regression)
 - LGBMClassifier + LGBMRegressor  
 - BERT Classifier + BERT Regressor
-- Ensemble models (not ready)
+- Hybrid approach (not ready)
 
 ### 📌 Tools
 - Python  
