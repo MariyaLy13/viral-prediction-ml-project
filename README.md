@@ -22,9 +22,9 @@ Create a model that predicts the virality of a post based on text and metadata, 
 ## 2. Data
 
 ### 📌 Data source  
-Raw data: https://arxiv.org/abs/1801.07055. 
+- Raw data: https://arxiv.org/abs/1801.07055. 
 This dataset contains news articles collected from multiple official media outlets, enriched with metadata and social engagement metrics from three major platforms: Facebook, Google+, and LinkedIn. It is commonly used for studying news popularity prediction, content virality, and cross‑platform engagement modeling.
-Preprocessed data - Google Drive: https://drive.google.com/drive/folders/1Dr7iBlU-zS3S4ZnUgry3L8jmsJn4T-XK?usp=sharing
+- Preprocessed data - Google Drive: https://drive.google.com/drive/folders/1Dr7iBlU-zS3S4ZnUgry3L8jmsJn4T-XK?usp=sharing
 
 ### 📌 Data structure  
 - Metadata
